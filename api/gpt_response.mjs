@@ -17,7 +17,7 @@ const chatgpt = new ChatGPTAPI({
   apiKey: process.env.API_KEY,
 });
 
-const gptResonse= async (req, res) => {
+const gptResonse= async function handler(req, res) {
   var message = req.body.message;
   var language = req.body.language;
   // console.log("this is mesage from API");
