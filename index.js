@@ -7,15 +7,19 @@ import fetch from "node-fetch";
 
 const app = express();
 
+import {gptResonse} from "./api/gpt_response.mjs";
+
 env.config();
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use('/api/gptresponse',gptResonse)
 
 // Initialize ChatGPT
 const chatgpt = new ChatGPTAPI({
   apiKey: process.env.API_KEY,
 });
+
 
 // dummy route to test
 app.get("/", (req, res) => {
