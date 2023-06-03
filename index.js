@@ -7,7 +7,7 @@ import fetch from "node-fetch";
 
 const app = express();
 
-import {gptResonse} from "./api/gpt_response.mjs";
+import {gptResonse} from "./api/gpt_response.js";
 
 env.config();
 
