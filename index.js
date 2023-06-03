@@ -183,4 +183,6 @@ app.post("/urduToRomanUrduTransliterationByGPT", async (req, res) => {
 });
 
 // listeninng
-app.listen("3080", () => console.log("listening on port 3080"));
+const port = 3080;
+const server=app.listen(port, () => console.log("listening on port 3080"));
+export {server};
