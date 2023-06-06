@@ -1,10 +1,10 @@
 {
-    "version": 2,
-    "name": "node-js",
-    "functions": {
-        "api/*":{
-         "memory": 256,
-         "maxDuration":60 
-        }
-      }
+  "version": 2,
+  "name": "node-js",
+  "builds": [
+      { "src": "index.js", "use": "@vercel/node" }
+  ],
+  "routes": [
+      { "src": "/(.*)", "dest": "/index.js" }
+  ]
 }
