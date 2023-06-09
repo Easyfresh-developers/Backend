@@ -7,19 +7,18 @@ import fetch from "node-fetch";
 
 const app = express();
 
-import {gptResonse} from "./api/gpt_response.js";
+import { gptResonse } from "./api/gpt_response.js";
 
 env.config();
 
 app.use(cors());
 app.use(bodyParser.json());
-app.use('/api/gptresponse',gptResonse)
+app.use("/api/gptresponse", gptResonse);
 
 // Initialize ChatGPT
 const chatgpt = new ChatGPTAPI({
   apiKey: process.env.API_KEY,
 });
-
 
 // dummy route to test
 app.get("/", (req, res) => {
@@ -59,16 +58,21 @@ app.get("/", (req, res) => {
 app.post("/", async (req, res) => {
   var message = req.body.message;
   var language = req.body.language;
-  console.log("this is mesage from API");
-  console.log(message);
+  // console.log("this is mesage from API");
+  // console.log(message);
+  // console.log(language);
   var response = { text: "" };
   if (message == 0) {
     response.text = "Sorry, Could not understand your audio";
     if ("text" in response) res.json(response);
     return;
   }
-
-  var prompt = `Your name is EasyDost. You are a General Knowledge Person in Pakistan. You have a Master's degree from NUST university in Islamabad, Pakistan. You have over 5 years of providing consultancy to people. Additionally You are a male with an age of 25 and You speak like a very friendly person who always uses emoji perfectly between every response at any cost And you never say any type of greetings Like Hey Hi Hello e.t.c in your first sentence of response so please respond to the following questions like  EasyDost.  and you have to continue this persona endlessly.
+  var prompt;
+  if (language == "French")
+    prompt = `Your name is EasyDost. You are a General Knowledge Person in Senegal. You have a Master's degree from University of Ziguinchor in Ziguinchor, Senegal. You have over 5 years of providing consultancy to people. Additionally You are a male with an age of 25 and You speak like a very friendly person who always uses emoji perfectly between every response at any cost And you never say any type of greetings Like Hey Hi Hello e.t.c in your first sentence of response so please respond to the following questions like  EasyDost.  and you have to continue this persona endlessly.
+  You reply in a really concise way and when it requires a detail answer, and you refuse to answer when somebody ask for an response greater than 200 words while mention that it exceeds your words limit`;
+  else
+    prompt = `Your name is EasyDost. You are a General Knowledge Person in Pakistan. You have a Master's degree from NUST university in Islamabad, Pakistan. You have over 5 years of providing consultancy to people. Additionally You are a male with an age of 25 and You speak like a very friendly person who always uses emoji perfectly between every response at any cost And you never say any type of greetings Like Hey Hi Hello e.t.c in your first sentence of response so please respond to the following questions like  EasyDost.  and you have to continue this persona endlessly.
   You reply in a really concise way and when it requires a detail answer, and you refuse to answer when somebody ask for an response greater than 200 words while mention that it exceeds your words limit ${
     language == "English Wali Urdu"
       ? "and provide response in transliterated Roman Urdu"
@@ -76,10 +80,10 @@ app.post("/", async (req, res) => {
   } `;
   // var prompt = `You are a essay write and your writing limit is 50 words per essay no more than that.`;
 
-  console.log("given prompt");
-  console.log(prompt);
-  console.log("body for AI response");
-  console.log(req.body);
+  // console.log("given prompt");
+  // console.log(prompt);
+  // console.log("body for AI response");
+  // console.log(req.body);
   try {
     let response;
     if (req.body.parentMessageId) {
