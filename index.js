@@ -403,7 +403,7 @@ app.post("/gptFunctions", async (req, res) => {
       headers: {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
-        Authorization: `Bearer ${process.env.API_KEY_HTF}`,
+        Authorization: `Bearer ${process.env.API_KEY}`,
       },
     });
     console.log("this the response from GPT");
