@@ -4,7 +4,7 @@ import cors from "cors";
 import env from "dotenv";
 import express from "express";
 import fetch from "node-fetch";
-const axios = require("axios")
+import axios from "axios"
 
 const app = express();
 
